@@ -56,6 +56,10 @@ spec:
         - 127.0.0.1
         - 8.8.8.8
       hostNetwork: {{ .Values.hostNetwork }}
+      {{- if .Values.imagePullSecrets.enabled }}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets.name }}
+      {{- end }}
       containers:
         {{- if .Values.monitoring.sidecar.enabled }}
         - name: exporter
